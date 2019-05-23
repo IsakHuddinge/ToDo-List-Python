@@ -1,5 +1,18 @@
 def displayList(myList):
-    print("Your List.")
+    if len(myList) > 0:
+        print("Your List: ")
+        # Go through all items in the list.
+        for i in range(len(myList)):
+            # Print index + 1 for readabiltiy.
+            # No new line at end.
+            print("[", i + 1, "] ", end="")
+            
+            print(myList[i]["title"],":")
+            print(myList[i]["description"])
+            # New Line for readability.
+            print("\nDeadline:", myList[i]["deadline"])
+    else:
+        print("Your List is empty.")
 
 #creates a new dictionary and adds it to a list.
 def addToList(myList, title, description, deadline):
@@ -20,7 +33,7 @@ def newTaskInput():
     deadline = input("Deadline: ")
     return title, description, deadline
 
-#List
+# List
 toDoList = []
 # loop for repeated user input.
 while True:
