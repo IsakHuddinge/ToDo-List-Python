@@ -9,13 +9,14 @@ def displayList(myList):
         print("Your List:")
         # Go through all items in the list
         for i in range(len(myList)):
-            # Print index + 1 for readabiltiy
-            # No new line at end
-            print("[" + str(i + 1) + "]", end="")
             if myList[i]["done"]:
                 print("[X]", end="")
             else:
-                print("[-]", end=" ")
+                print("[-]", end="")
+
+            # Print index + 1 for readabiltiy
+            # No new line at end
+            print("[" + str(i + 1) + "]", end=" ")
             
             print(myList[i]["title"] + ":")
             print(myList[i]["description"])
@@ -47,12 +48,12 @@ def newTaskInput():
     deadline = input("Deadline: ")
     return title, description, deadline
 
-def displayControls(items):
+def displayControls(noOfItems):
     print("[N]ew task")
-    if items == 1:
+    if noOfItems == 1:
         print("[1] Change done status for task.")
-    elif items > 1:
-        print("[1-" + str(items) + "] Change done status for task")
+    elif noOfItems > 1:
+        print("[1-" + str(noOfItems) + "] Change done status for task")
     print("[Q]uit")
     
 # List
@@ -63,7 +64,7 @@ while True:
     clear()
     displayList(toDoList)
     displayControls(len(toDoList))
-    userInput = input(">").lower().strip()
+    userInput = input("> ").lower().strip()
     # Create a new todo
     if userInput == "n":
         # Get input
@@ -73,3 +74,18 @@ while True:
     # Break out of loop, ending program
     elif userInput == "q":
         break
+    # Check if user inputed a number to toggle done status
+    else:
+        # Try to convert user input string to int
+        try:
+           int(userInput)
+        except:
+            userInput = 0
+        else:
+            userInput = int(userInput)
+            # If it succeds, check if it's within list length
+            if userInput >= 1 and userInput <= len(toDoList):
+                # toogle done status
+                toDoList[userInput - 1]["done"] = not toDoList[userInput - 1]["done"]
+
+            
